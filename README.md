@@ -20,6 +20,10 @@ You will need the following things properly installed on your computer.
 * `npm install`
 * `bower install`
 
+## Data
+
+* Generate `curl` command from [dev.twitter.com](https://dev.twitter.com/rest/reference/get/statuses/user_timeline) with "OAuth Signature Generator" (you will need to create a Twitter app if you haven't already)
+
 ## Running / Development
 
 * `ember server`
@@ -50,4 +54,4 @@ Specify what it takes to deploy your app.
 * Development Browser Extensions
   * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
   * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
-
+* On the `{{each}}` pattern for *static* charts: [stackoverflow.com](http://stackoverflow.com/questions/27493533/d3-transitions-in-ember-when-ember-takes-care-of-data-joins)
