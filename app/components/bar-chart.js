@@ -1,4 +1,5 @@
 import Ember from "ember";
+
 /* global d3 */
 
 export default Ember.Component.extend({
@@ -7,8 +8,8 @@ export default Ember.Component.extend({
 	classNames: ["chart"],
 
 	margin: { top: 20, right: 80, bottom: 40, left: 80 }, // See @mbostock's "margin convention": http://bl.ocks.org/mbostock/3019563
-	width: 1050,
-	height: 400,
+	width: 1200,
+	height: 600,
 
 	chartW: function() {
 		var width = this.get("width"),
@@ -31,26 +32,27 @@ export default Ember.Component.extend({
 	}.property("chartH"),
 
 	bins: function() {
-		var M = d3.max(this.get("data"), function(d) { return d.created_at; });
-		var m = d3.min(this.get("data"), function(d) { return d.created_at; });
-		var bins = d3.time.months(m, M);
-		bins.unshift(d3.time.month(m));
-		bins.push(d3.time.month(M));
+		var data = this.get("data");
+		var M = d3.max(data, function(d) { return d.created_at; });
+		var m = d3.min(data, function(d) { return d.created_at; });
+		var bins = d3.time.minutes(m, M);
+		bins.unshiftObject(d3.time.minute(m));
+		bins.pushObject(d3.time.minute(M));
 		return bins;
-	}.property("data"),
+	}.property("data.@each"),
 
 	histogram: function() {
 		var bins = this.get("bins"),
 			data = this.get("data");
 		var values = data.map(function(d) { return d.created_at; });
 		return d3.layout.histogram().bins(bins)(values);
-	}.property("data", "bins"),
+	}.property("data.@each", "bins.@each"),
 
 	xScale: function() {
 		return d3.scale.ordinal()
 			.domain(this.get("bins"))
 			.rangeRoundBands([ 0, this.get("chartW") ], .2);
-	}.property("chartW", "bins"),
+	}.property("chartW", "bins.@each"),
 
 	yScale: function() {
 		return d3.scale.linear()
@@ -98,7 +100,9 @@ export default Ember.Component.extend({
 		svg.select(".y-axis-group").call(yAxis);
 
 		var bar = svg.select(".chart-group").selectAll(".bar")
-			.data(data);
+			.data(data, function(d) { return d.x; });
+
+		bar.exit().remove();
 
 		bar.enter()
 			.append("rect")
