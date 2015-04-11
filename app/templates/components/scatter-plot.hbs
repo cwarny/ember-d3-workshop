@@ -1,0 +1,9 @@
+<g transform={{transformG}}>
+	<g class="x-axis-group axis" transform={{transformX}}></g>
+	<g class="y-axis-group axis"></g>
+	<g class="chart-group">
+		{{#each renderedData as |d|}}
+			{{svg-circle x=d.x y=d.y r=d.r color=d.color label=d.label}}
+		{{/each}}
+	</g>
+</g>

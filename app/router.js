@@ -6,7 +6,8 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-	this.resource("tweets", { path: '/' });
+	this.resource("tweets", { path: '/tweets' });
+	this.resource("bond", { path: '/bond' });
 });
 
 export default Router;

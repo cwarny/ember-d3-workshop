@@ -1,9 +1,8 @@
 module.exports = function(app) {
   var express = require('express');
+  var bondRouter = express.Router();
 
-  var tweetsRouter = express.Router();
-
-  tweetsRouter.get('/', function(req, res) {
+  bondRouter.get('/', function(req, res) {
     var options = {
       root: __dirname,
       headers: {
@@ -11,7 +10,7 @@ module.exports = function(app) {
         'x-sent': true
       }
     };
-    res.sendFile("data.json", options, function (err) {
+    res.sendFile("bond.json", options, function (err) {
       if (err) {
         console.log(err);
         res.status(err.status).end();
@@ -22,29 +21,29 @@ module.exports = function(app) {
     });
   });
 
-  tweetsRouter.post('/', function(req, res) {
+  bondRouter.post('/', function(req, res) {
     res.status(201).end();
   });
 
-  tweetsRouter.get('/:id', function(req, res) {
+  bondRouter.get('/:id', function(req, res) {
     res.send({
-      'tweets': {
+      'bond': {
         id: req.params.id
       }
     });
   });
 
-  tweetsRouter.put('/:id', function(req, res) {
+  bondRouter.put('/:id', function(req, res) {
     res.send({
-      'tweets': {
+      'bond': {
         id: req.params.id
       }
     });
   });
 
-  tweetsRouter.delete('/:id', function(req, res) {
+  bondRouter.delete('/:id', function(req, res) {
     res.status(204).end();
   });
 
-  app.use('/api/tweets', tweetsRouter);
+  app.use('/api/bond', bondRouter);
 };
