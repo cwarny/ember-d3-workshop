@@ -11,7 +11,7 @@ module.exports = function(app) {
         'x-sent': true
       }
     };
-    res.sendFile("data.json", options, function (err) {
+    res.sendFile("tweets.json", options, function (err) {
       if (err) {
         console.log(err);
         res.status(err.status).end();
