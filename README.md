@@ -34,9 +34,11 @@ You will need the following things properly installed on your computer.
 * `ember server`
 * On route `/bond` you will see a scatter plot of the number of Bond kills per movie
 * On route `/tweets` you will see a bar chart of the volume of tweets for a Twitter profile in function of time
-* To see the same bar chart being fed streaming data from the Twitter API, you will have to the following:
-	* Switch to the `websockets` branch in the project folder (`git checkout websockets`)
-	* Add a `config.js` file under `/server` where you specify a Twitter app's **API key**, **API secret**, **API token** and **API token secret** like so:
+
+To see the same bar chart being fed streaming data from the Twitter API, you will have to do the following:
+
+* Switch to the `websockets` branch in the project folder (`git checkout websockets`)
+* Add a `config.js` file under `/server` where you specify a Twitter app's **API key**, **API secret**, **API token** and **API token secret** like so:
 
 ```
 // config.js
@@ -48,9 +50,9 @@ module.exports = {
 };
 ```
 
-	* `ember server`
-	* Navigate to `localhost:4200`
-	* You should see an updating chart indicating the current volume of tweets about Justin Bieber
+* `ember server`
+* Navigate to `localhost:4200`
+* You should see an updating chart indicating the current volume of tweets about Justin Bieber
 
 ## Further Reading / Useful Links
 
