@@ -47,6 +47,7 @@ module.exports = {
 	token_secret: "APP_TOKEN_SECRET"
 };
 ```
+
 	* `ember server`
 	* Navigate to `localhost:4200`
 	* You should see an updating chart indicating the current volume of tweets about Justin Bieber
