@@ -1,7 +1,16 @@
-# Ember-d3-workshop
+# Ember-d3 workshop
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This workshop illustrates different approaches to creating d3 visualizations within Ember, through two visualizations:
+
+1. A scatter plot of the number of kills by James Bond per James Bond movie
+	
+This chart illustrates the template-based approach to d3 visualization in Ember: the data points are wrapped into an `{{each}}` helper and each individual data point becomes itself a component, where you can handle data point-level interaction.
+
+2. A bar chart of volume of tweets in time
+
+This chart illustrates how you can still use the classic d3 approach to *joins* and *transitions*.
+
+Both components illustrate the importance of using computed properties in Ember. Also, we see how a well-defined component API enables us to feed our chart components different data without having to change the component code itself, whether that be a different dataset or a change from static data to streaming data.
 
 ## Prerequisites
 
@@ -20,32 +29,27 @@ You will need the following things properly installed on your computer.
 * `npm install`
 * `bower install`
 
-## Data
-
-* Generate `curl` command from [dev.twitter.com](https://dev.twitter.com/rest/reference/get/statuses/user_timeline) with "OAuth Signature Generator" (you will need to create a Twitter app if you haven't already)
-
 ## Running / Development
 
 * `ember server`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+* On route `/bond` you will see a scatter plot of the number of Bond kills per movie
+* On route `/tweets` you will see a bar chart of the volume of tweets for a Twitter profile in function of time
+* To see the same bar chart being fed streaming data from the Twitter API, you will have to the following:
+	* Switch to the `websockets` branch in the project folder (`git checkout websockets`)
+	* Add a `config.js` file under `/server` where you specify a Twitter app's **API key**, **API secret**, **API token** and **API token secret** like so:
 
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
+```
+// config.js
+module.exports = {
+	consumer_key: "APP_CONSUMER_KEY",
+	consumer_secret: "APP_CONSUMER_SECRET",
+	token: "APP_TOKEN",
+	token_secret: "APP_TOKEN_SECRET"
+};
+```
+	* `ember server`
+	* Navigate to `localhost:4200`
+	* You should see an updating chart indicating the current volume of tweets about Justin Bieber
 
 ## Further Reading / Useful Links
 
